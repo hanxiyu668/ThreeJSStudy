@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div class="three-canvas" ref="threeTarget"></div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref, onMounted } from "@vue/composition-api";
+import useStudy from "./study/model/study01";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  setup() {
+    const threeTarget = ref(null);
+    onMounted(() => {
+      useStudy(threeTarget.value);
+    });
+    return {
+      threeTarget,
+    };
+  },
+  components: {},
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.three-canvas {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 </style>
