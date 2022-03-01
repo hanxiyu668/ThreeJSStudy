@@ -81,12 +81,12 @@ const useStudy = (dom) => {
     const wind_turbine_top = new BoxBufferGeometry(2, 2, 5) // 风力发电机顶部
     wind_turbine_top.translate(0, 40, 1)
     const arc = new EllipseCurve(0, 0, 1, 1.5, 0, Math.PI / 2);
-    const line = new LineCurve(new Vector2(1, -0.6, 0), new Vector2(1, 0, 0))
+    const line = new LineCurve(new Vector2(1, -1, 0), new Vector2(1, 0, 0))
     var curvePath = new CurvePath();
     curvePath.curves.push(line, arc,);
     var wind_turbine_shaft = new LatheGeometry(curvePath.getPoints(30), 30);// 风力发电机转轴
     wind_turbine_shaft.rotateX(Math.PI / 2)
-    wind_turbine_shaft.translate(0, 40, 4)
+    wind_turbine_shaft.translate(0, 40, 4.5)
     const wind_turbine_base = BufferGeometryUtils.mergeBufferGeometries([wind_turbine_bottom, wind_turbine_top, wind_turbine_shaft], false);
     var material = new MeshStandardMaterial({
         color: 'white',
@@ -97,21 +97,21 @@ const useStudy = (dom) => {
 
 
     var line1 = new LineCurve(new Vector2(0, 0), new Vector2(0, 3));
-    var line2 = new LineCurve(new Vector2(0, 3), new Vector2(12, 7));
+    //var line2 = new LineCurve(new Vector2(0, 3), new Vector2(12, 7));
     var curve = new QuadraticBezierCurve(
-        new Vector2(12, 7),
-        new Vector2(20, 9),
-        new Vector2(30, 8)
+        new Vector2(0, 3),
+        new Vector2(18, 5),
+        new Vector2(25, 8)
     );
-    var line3 = new LineCurve(new Vector2(30, 8), new Vector2(100, 1));
-    var line4 = new LineCurve(new Vector2(100, 1), new Vector2(100, 0));
+    var line3 = new LineCurve(new Vector2(30, 8), new Vector2(100, 2));
+    var line4 = new LineCurve(new Vector2(100, 2), new Vector2(100, 0));
     var line5 = new LineCurve(new Vector2(100, 0), new Vector2(0, 0));
     var curvePath_blade = new CurvePath();
-    curvePath_blade.curves.push(line1, line2, curve, line3, line4, line5);
+    curvePath_blade.curves.push(line1, curve, line3, line4, line5);
     var shape = new Shape(curvePath_blade.getPoints(50));
 
     const blade_material = new MeshStandardMaterial({
-        color: 'gray',
+        color: 'white',
     });//材质对象
     // const blade_group = new Group()
     const blade_arr = []
@@ -123,6 +123,7 @@ const useStudy = (dom) => {
                 bevelEnabled: false//无倒角
             }
         );
+        geometry.translate(0,-1.5,0)
         geometry.rotateX(-Math.PI / 10)
         geometry.rotateZ(Math.PI * 2 / 3 * i)
         blade_arr.push(geometry)
@@ -132,7 +133,7 @@ const useStudy = (dom) => {
     const blade_mesh = new Mesh(blade_group, blade_material);//旋转网格模型对象
     blade_mesh.scale.set(0.25, 0.25, 0.25)
     blade_mesh.position.y = 40
-    blade_mesh.position.z = 4
+    blade_mesh.position.z = 4.5
     scene.add(blade_mesh)
 
 
