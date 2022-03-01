@@ -4,7 +4,7 @@
 
 <script>
 import { ref, onMounted } from "@vue/composition-api";
-import useStudy from "./study/model/study03";
+import useStudy from "./study/model/study05";
 export default {
   name: "App",
   setup() {

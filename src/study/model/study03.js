@@ -151,8 +151,6 @@ const useStudy = (dom) => {
 
     scene.add(ground);
 
-
-
     // 精灵标签
     const canvasTexture = new TCanvasTexture()
     canvasTexture.draw((ctx) => {
