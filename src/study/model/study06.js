@@ -10,8 +10,9 @@ import {
     DirectionalLight,
     AxesHelper,
     GridHelper,
-    MTLLoader,
-    OBJLoader
+    GLTFLoader
+    // MTLLoader,
+    // OBJLoader
     //  SphereGeometry,
 } from "three"
 const useStudy = (dom) => {
@@ -54,23 +55,29 @@ const useStudy = (dom) => {
     scene.add(dirLight)
     //#endregion
 
+    const loader = new GLTFLoader().setPath( 'model/' );
+    // loader.load( 'host.gltf', function ( gltf ) {
+    //     // gltf.scene.scale.set( 10.0, 10.0, 10.0 );
+    //     scene.add( gltf.scene );
 
+    // })
 
-
-
-    var _BJLoader = new OBJLoader();//obj加载器
-    var _MTLLoader = new MTLLoader();//材质文件加载器
-    _MTLLoader.load('./model/display.mtl', function (materials) {
-        // 返回一个包含材质的对象MaterialCreator
-        console.log(materials);
-        //obj的模型会和MaterialCreator包含的材质对应起来
-        _BJLoader.setMaterials(materials);
-        _BJLoader.load('./model/display.obj', function (obj) {
-            console.log(obj);
-           
-            scene.add(obj);//返回的组对象插入场景中
-        })
+    loader.loadAsync( 'server.gltf').then((gltf) => {
+        scene.add( gltf.scene );
     })
+    // var _BJLoader = new OBJLoader();//obj加载器
+    // var _MTLLoader = new MTLLoader();//材质文件加载器
+    // _MTLLoader.load('./model/display.mtl', function (materials) {
+    //     // 返回一个包含材质的对象MaterialCreator
+    //     console.log(materials);
+    //     //obj的模型会和MaterialCreator包含的材质对应起来
+    //     _BJLoader.setMaterials(materials);
+    //     _BJLoader.load('./model/display.obj', function (obj) {
+    //         console.log(obj);
+           
+    //         scene.add(obj);//返回的组对象插入场景中
+    //     })
+    // })
 
     //#region 
     const axesHelper = new AxesHelper(500)
